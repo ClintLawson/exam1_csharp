@@ -1,0 +1,71 @@
+@model Party
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Activity</title>
+</head>
+<body>
+    <div style="width: 800px; margin:auto;">
+
+        <div class="header" style="display: flex; justify-content: space-between; border-bottom: black 1px solid;">
+            <h1>Dojo Activity Center</h1>
+            <div style="margin: auto 15px; display: flex;">
+                <a href="/home" style="margin-left: 30px;"><p>Home</p></a>
+                <a href="/logout" style="margin-left: 30px;"><p>Logout</p></a>
+            </div>
+        </div>
+
+        <div style="width: 80%; margin: auto;">
+            <h2>Create an Activity</h2>
+            <form asp-action="CreateParty" asp-controller="Planner" method="POST" style="width: 90%; margin: auto;">
+                <input asp-for="OwnerId" hidden>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 18px;">
+                    <div style="display: block; width: 45%;">
+                        <span asp-validation-for="Title" style="color: red;"></span>
+                        <div style="display: flex; justify-content: space-between;">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%">
+                        <label asp-for="Time"></label>
+                        <input asp-for="Time" asp-format="{0:dd/MM/yyyy HH:mm}"value="12:00">
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 18px;">
+                    <div style="display: block; width: 45%;">
+                        <span asp-validation-for="Date" style="color: red;"></span>
+                        <div style="display: flex; justify-content: space-between;">
+                            <label asp-for="Date"></label>
+                            <input asp-for="Date" asp-format="{0:dd/MM/yyyy HH:mm}" >
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 45%">
+                        <label asp-for="Duration"></label>
+                        <input asp-for="Duration" style="width: 50px;" value="30">
+                        <select asp-for="DurationUnit" style="margin-left: 20px;">
+                            <option value="Minutes">Minutes</option>
+                            <option value="Hours">Hours</option>
+                            <option value="Days">Days</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: block;">
+                    <span asp-validation-for="Description" style="color: red;"></span>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 18px;">
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description" style="width: 80%; height: 100px;"></textarea>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <button type="submit" style=" background-color: white; padding: 5px 10px; text-decoration: none; border: black 1px solid; box-shadow: 3px 3px black;">
+                        Add New Activity
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

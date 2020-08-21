@@ -1,0 +1,56 @@
+@model Party
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Activity</title>
+</head>
+<body>
+    <div style="width: 800px; margin:auto;">
+
+        <div class="header" style="display: flex; justify-content: space-between; border-bottom: black 1px solid;">
+            <h1>Dojo Activity Center</h1>
+            <div style="margin: auto 15px; display: flex;">
+                <a href="/home" style="margin-left: 30px;"><p>Home</p></a>
+                <a href="/logout" style="margin-left: 30px;"><p>Logout</p></a>
+            </div>
+        </div>
+
+        <div style="width: 80%; margin: auto;">
+            <div style="display: flex; justify-content: space-between;">
+                <h2>@Model.Title</h2>
+                
+                <div style="text-align: right; margin: auto 20px;">
+                    @if(Model.OwnerId == ViewBag.userId){
+                        <a href="/delete/@Model.PartyId" style="padding: 5px 15px; text-decoration: none; border: black 1px solid; box-shadow: 3px 3px black;">
+                        Delete
+                        </a>
+                    }
+                    else if(Model.RSVPs.Any(r => r.UserId == ViewBag.userId)){
+                        <a href="/change_rsvp/@Model.PartyId/1" style="padding: 5px 15px; text-decoration: none; border: black 1px solid; box-shadow: 3px 3px black;">
+                            Leave
+                        </a>
+                    }
+                    else{
+                        <a href="/change_rsvp/@Model.PartyId/1" style="padding: 5px 15px; text-decoration: none; border: black 1px solid; box-shadow: 3px 3px black;">
+                            Join
+                        </a>
+                    }
+                </div>
+            </div>
+            <div style="margin-left: 40px;">
+                <h3>Event Coordinator: <span style="margin-left: 20px;"></span> @Model.Owner.Name</h3>
+                <h3>Description: </h3>
+                <p style=" margin-left: 30px;">@Model.Description</p>
+                <h3>Participants</h3>
+                <ul>
+                    @foreach(var r in Model.RSVPs){
+                        <li>@r.User.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

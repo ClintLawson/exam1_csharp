@@ -1,0 +1,61 @@
+@model PlannerVmod
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Activity Center</title>
+</head>
+<body>
+    <div style="width: 800px; margin:auto;">
+
+        <div class="header" style="display: flex; justify-content: space-between; border-bottom: black 1px solid;">
+            <h1>Dojo Activity Center</h1>
+            <div style="margin: auto 15px; display: flex;">
+                <p>Welcome, @Model.User.Name</p>
+                <a href="/logout" style="margin-left: 30px;"><p>Logout</p></a>
+            </div>
+        </div>
+
+        <div>
+            <table style="margin: 20px 0px; width: 100%;">
+                <tr style="background-color: gray;">
+                    <th>Activity</th>
+                    <th>Date and Time</th>
+                    <th>Duration</th>
+                    <th>Event Coordinator</th>
+                    <th>No. of Participants</th>
+                    <th>Actions</th>
+                </tr>
+                @foreach(var r in Model.Parties)
+                {
+                    <tr style="background-color: lightgray;">
+                        <td><a href="activity/@r.PartyId"> @r.Title</a></td>
+                        <td>@r.Date.ToString("MM/dd/yyyy") @@ @r.Date.ToString("hh:mm tt")</td>
+                        <td>@r.Duration @r.DurationUnit</td>
+                        <td>@r.Owner.Name</td>
+                        <td>@r.RSVPs.Count</td>
+                        @if(r.OwnerId == Model.User.UserId){
+                            <td><a href="/delete/@r.PartyId">Delete</a></td>
+                        }
+                        else{
+                            @if(r.RSVPs.Any(r => r.UserId == Model.User.UserId)){
+                                <td><a href="/change_rsvp/@r.PartyId/0">Leave</a></td>
+                            }
+                            else{
+                                <td><a href="/change_rsvp/@r.PartyId/0">Join</a></td>
+                            }
+                        }
+                    </tr>
+                }
+            </table>
+            <div style="text-align: right; margin-right: 20px;">
+                <a href="/new" style="padding: 5px 10px; text-decoration: none; border: black 1px solid; box-shadow: 3px 3px black;">
+                    Add New Activity
+                </a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

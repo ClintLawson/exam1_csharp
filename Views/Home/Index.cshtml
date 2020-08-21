@@ -1,0 +1,74 @@
+@model LogRegVmod
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <div class="wrapper" style="width: 700px; margin: auto;">
+
+        <div>
+            <h1>Welcome to the Dojo Activity Center</h1>
+        </div>
+        <div style=" display: flex;">
+        <div class="register" style="border: black 1px solid; padding: 20px;">
+            <h2 style="text-align: center;">Register</h2>
+
+            <div style="width: 280px; ">
+                <form asp-action="Register" asp-controller="Home" method="POST" >
+                        <span style="color: red; margin-left: 20px;" asp-validation-for="register.Name"></span><br>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <label asp-for="register.Name" ></label>
+                        <input asp-for="register.Name">
+                    </div>
+
+                        <span style="color: red; margin-left: 20px;" asp-validation-for="register.Email"></span><br>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <label asp-for="register.Email" ></label>
+                        <input asp-for="register.Email">
+                    </div>
+                        <span style="color: red; margin-left: 20px;" asp-validation-for="register.Password"></span><br>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <label asp-for="register.Password" ></label>
+                        <input asp-for="register.Password">
+                    </div>
+                        <span style="color: red; margin-left: 20px; " asp-validation-for="register.Confirm"></span><br>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <label asp-for="register.Confirm" ></label>
+                        <input asp-for="register.Confirm">
+                    </div>
+                    <p style="text-align: center;">
+                        <button type="submit" >Register</button>
+                    </p>
+                </form>
+            </div>
+
+        </div>
+            <div class="login" style="margin: 0px auto; width: 250px; border: black 1px solid; padding: 20px;">
+
+                <h2 style="text-align: center;">Login</h2>
+                <div>
+                    <form asp-action="LogUserIn" asp-controller="Home" method="POST" >
+                            <span style="color: red; margin-left: 20px;" asp-validation-for="login.Email"> </span><br>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <label asp-for="login.Email" ></label>
+                            <input asp-for="login.Email">
+                        </div>
+                            <span style="color: red; margin-left: 20px;" asp-validation-for="login.Password"></span><br>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <label asp-for="login.Password" ></label>
+                            <input asp-for="login.Password">
+                        </div>
+                        <p style="text-align: center;">
+                            <button type="submit" >Login</button>
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
